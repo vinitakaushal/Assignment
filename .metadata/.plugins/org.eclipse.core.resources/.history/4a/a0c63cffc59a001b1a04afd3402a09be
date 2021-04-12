@@ -1,0 +1,35 @@
+package com.assignment1.utility;
+
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.Properties;
+
+import org.apache.log4j.Logger;
+import org.apache.log4j.PropertyConfigurator;
+
+public class UtilityMethods {
+	public static Logger logger;
+
+
+	/**
+	 * Open the .properties file
+	 * @param filePath
+	 * @return
+	 */
+	public static Properties OpenProperties(String filePath) {
+		Properties prop = new Properties();
+		try {
+			FileInputStream file = new FileInputStream(filePath);
+			prop.load(file);
+		} catch (FileNotFoundException e) {
+			logger.info("FileNotFoundException" + e.getMessage());
+		} catch (IOException e) {
+			logger.info("IOException" + e.getMessage());
+		}
+		return prop;
+	}
+}

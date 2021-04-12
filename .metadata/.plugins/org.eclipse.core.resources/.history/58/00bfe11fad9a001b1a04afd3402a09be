@@ -1,0 +1,22 @@
+package com.assignment1.pages;
+
+import org.openqa.selenium.support.FindBy;
+
+import com.codeborne.selenide.Condition;
+import com.codeborne.selenide.SelenideElement;
+
+public class Booking {
+
+	@FindBy(xpath="//select[@name='fromPort']")
+	private SelenideElement DepartureCityDD;
+	
+	@FindBy(xpath="//select[@name='toPort']")
+	private SelenideElement DestinationCityDD;
+	
+	@FindBy(xpath="//input[@value='Find Flights']")
+	private SelenideElement FindFlightsButton;
+	
+	public void selectDepartCity(String depCity) {
+		DepartureCityDD.shouldBe(Condition.visible).selectOption(depCity);
+	}
+}

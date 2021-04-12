@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testng-results skipped="0" failed="0" ignored="0" total="1" passed="1">
+  <reporter-output>
+    <line>
+      <![CDATA[The response Body is {"coord":{"lon":-0.1257,"lat":51.5085},"weather":[{"id":804,"main":"Clouds","description":"overcast clouds","icon":"04d"}],"base":"stations","main":{"temp":277.76,"feels_like":275.53,"temp_min":277.04,"temp_max":278.71,"pressure":1029,"humidity":81},"visibility":10000,"wind":{"speed":2.57,"deg":230},"clouds":{"all":96},"dt":1618221655,"sys":{"type":1,"id":1414,"country":"GB","sunrise":1618204250,"sunset":1618253474},"timezone":3600,"id":2643743,"name":"London","cod":200}]]>
+    </line>
+    <line>
+      <![CDATA[The response Code is 200]]>
+    </line>
+    <line>
+      <![CDATA[TimeZone is :3600]]>
+    </line>
+    <line>
+      <![CDATA[Weather List contains : Clouds]]>
+    </line>
+  </reporter-output>
+  <suite name="Parse Json" duration-ms="2462" started-at="2021-04-12T10:03:23Z" finished-at="2021-04-12T10:03:25Z">
+    <groups>
+    </groups>
+    <test name="Parse json validation test" duration-ms="2462" started-at="2021-04-12T10:03:23Z" finished-at="2021-04-12T10:03:25Z">
+      <class name="com.assignment1.restAssured.ParseJSONContent">
+        <test-method status="PASS" signature="validate()[pri:0, instance:com.assignment1.restAssured.ParseJSONContent@29774679]" name="validate" duration-ms="2441" started-at="2021-04-12T15:33:23Z" finished-at="2021-04-12T15:33:25Z">
+          <reporter-output>
+            <line>
+              <![CDATA[The response Body is {"coord":{"lon":-0.1257,"lat":51.5085},"weather":[{"id":804,"main":"Clouds","description":"overcast clouds","icon":"04d"}],"base":"stations","main":{"temp":277.76,"feels_like":275.53,"temp_min":277.04,"temp_max":278.71,"pressure":1029,"humidity":81},"visibility":10000,"wind":{"speed":2.57,"deg":230},"clouds":{"all":96},"dt":1618221655,"sys":{"type":1,"id":1414,"country":"GB","sunrise":1618204250,"sunset":1618253474},"timezone":3600,"id":2643743,"name":"London","cod":200}]]>
+            </line>
+            <line>
+              <![CDATA[The response Code is 200]]>
+            </line>
+            <line>
+              <![CDATA[TimeZone is :3600]]>
+            </line>
+            <line>
+              <![CDATA[Weather List contains : Clouds]]>
+            </line>
+          </reporter-output>
+        </test-method> <!-- validate -->
+      </class> <!-- com.assignment1.restAssured.ParseJSONContent -->
+    </test> <!-- Parse json validation test -->
+  </suite> <!-- Parse Json -->
+</testng-results>

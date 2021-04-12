@@ -1,0 +1,7 @@
+package com.assignment1.pages;
+
+public class Booking {
+
+	@FindBy(xpath="//select[@name='fromPort']")
+	private SelenideElement DepartureCity;
+}

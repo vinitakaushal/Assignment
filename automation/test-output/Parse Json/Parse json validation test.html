@@ -1,0 +1,94 @@
+<html>
+<head>
+<title>TestNG:  Parse json validation test</title>
+<link href="../testng.css" rel="stylesheet" type="text/css" />
+<link href="../my-testng.css" rel="stylesheet" type="text/css" />
+
+<style type="text/css">
+.log { display: none;} 
+.stack-trace { display: none;} 
+</style>
+<script type="text/javascript">
+<!--
+function flip(e) {
+  current = e.style.display;
+  if (current == 'block') {
+    e.style.display = 'none';
+    return 0;
+  }
+  else {
+    e.style.display = 'block';
+    return 1;
+  }
+}
+
+function toggleBox(szDivId, elem, msg1, msg2)
+{
+  var res = -1;  if (document.getElementById) {
+    res = flip(document.getElementById(szDivId));
+  }
+  else if (document.all) {
+    // this is the way old msie versions work
+    res = flip(document.all[szDivId]);
+  }
+  if(elem) {
+    if(res == 0) elem.innerHTML = msg1; else elem.innerHTML = msg2;
+  }
+
+}
+
+function toggleAllBoxes() {
+  if (document.getElementsByTagName) {
+    d = document.getElementsByTagName('div');
+    for (i = 0; i < d.length; i++) {
+      if (d[i].className == 'log') {
+        flip(d[i]);
+      }
+    }
+  }
+}
+
+// -->
+</script>
+
+</head>
+<body>
+<h2 align='center'>Parse json validation test</h2><table border='1' align="center">
+<tr>
+<td>Tests passed/Failed/Skipped:</td><td>1/0/0</td>
+</tr><tr>
+<td>Started on:</td><td>Mon Apr 12 15:33:23 IST 2021</td>
+</tr>
+<tr><td>Total time:</td><td>2 seconds (2462 ms)</td>
+</tr><tr>
+<td>Included groups:</td><td></td>
+</tr><tr>
+<td>Excluded groups:</td><td></td>
+</tr>
+</table><p/>
+<small><i>(Hover the method name to see the test class name)</i></small><p/>
+<table width='100%' border='1' class='invocation-passed'>
+<tr><td colspan='4' align='center'><b>PASSED TESTS</b></td></tr>
+<tr><td><b>Test method</b></td>
+<td width="30%"><b>Exception</b></td>
+<td width="10%"><b>Time (seconds)</b></td>
+<td><b>Instance</b></td>
+</tr>
+<tr>
+<td title='com.assignment1.restAssured.ParseJSONContent.validate()'><b>validate</b><br>Test class: com.assignment1.restAssured.ParseJSONContent<br/>
+<a href="#Output-404947798" onClick='toggleBox("Output-404947798", this, "Show output", "Hide output");'>Show output</a>
+
+<a href="#Output-404947798" onClick="toggleAllBoxes();">Show all outputs</a>
+<div class='log' id="Output-404947798">
+The response Body is {"coord":{"lon":-0.1257,"lat":51.5085},"weather":[{"id":804,"main":"Clouds","description":"overcast clouds","icon":"04d"}],"base":"stations","main":{"temp":277.76,"feels_like":275.53,"temp_min":277.04,"temp_max":278.71,"pressure":1029,"humidity":81},"visibility":10000,"wind":{"speed":2.57,"deg":230},"clouds":{"all":96},"dt":1618221655,"sys":{"type":1,"id":1414,"country":"GB","sunrise":1618204250,"sunset":1618253474},"timezone":3600,"id":2643743,"name":"London","cod":200}<br/>
+The response Code is 200<br/>
+TimeZone is :3600<br/>
+Weather List contains : Clouds<br/>
+</div>
+</td>
+<td></td>
+<td>2</td>
+<td>com.assignment1.restAssured.ParseJSONContent@29774679</td></tr>
+</table><p>
+</body>
+</html>

@@ -1,0 +1,21 @@
+package com.assignment1.pages;
+
+import org.openqa.selenium.By;
+import com.codeborne.selenide.Condition;
+import com.codeborne.selenide.SelenideElement;
+
+import static com.codeborne.selenide.Selenide.$;
+
+public class FlightRecommendation {
+
+	
+public void clickChooseFlightByRow(int i) {
+	SelenideElement ChooseFlightButton =$(By.xpath("(//input[@value='Choose This Flight'])["+i+"]"));
+	ChooseFlightButton.shouldBe(Condition.visible).click();	
+}
+
+public void clickChooseFlightByFlightNumber(String fligthNo) {
+	SelenideElement ChooseFlightBtn=$(By.xpath("//td[text()='43']//ancestor::tr//input[@value='Choose This Flight']"));
+	ChooseFlightBtn.shouldBe(Condition.enabled).click();
+}
+}

@@ -1,0 +1,14 @@
+package com.assignment1.automation;
+
+import org.testng.annotations.Test;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.AfterClass;
+
+public class BookingFlow {
+  @Test
+  public void searchFlight() {
+	  
+  }
+  
+
+}

@@ -1,0 +1,11 @@
+package com.assignment1.pages;
+
+import org.openqa.selenium.support.FindBy;
+
+import com.codeborne.selenide.SelenideElement;
+
+public class Booking {
+
+	@FindBy(xpath="//select[@name='fromPort']")
+	private SelenideElement DepartureCity;
+}

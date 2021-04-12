@@ -1,0 +1,236 @@
+package com.assignment.task4;
+
+import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.xssf.usermodel.XSSFCell;
+import org.apache.poi.xssf.usermodel.XSSFRow;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.json.simple.JSONObject;
+import org.testng.Reporter;
+import org.testng.annotations.DataProvider;
+import org.testng.annotations.Test;
+
+import static com.jayway.restassured.RestAssured.given;
+import com.assignment.task1.model.*;
+import com.assignment.task4.Pojo;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.lang.reflect.Type;
+import java.util.ArrayList;
+import java.util.Map;
+import java.util.Set;
+import java.util.TreeMap;
+
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+import com.jayway.restassured.RestAssured;
+import com.jayway.restassured.builder.RequestSpecBuilder;
+import com.jayway.restassured.config.SSLConfig;
+import com.jayway.restassured.response.Response;
+import com.jayway.restassured.config.SSLConfig;
+import com.jayway.restassured.specification.RequestSpecification;
+
+public class WriteToExcel {
+	private static XSSFSheet ExcelWSheet;
+	private static XSSFWorkbook ExcelWBook;
+	private static XSSFCell Cell;
+	private static XSSFRow Row;
+
+	public static void readExcel(String temp, String temp_min, String temp_max, String pressure, String sea_level) {
+		Reporter.log("Temperature is :" + temp, true);
+		Reporter.log("Minimum Temperature is :" + temp_min, true);
+		Reporter.log("Maximum Temperature is :" + temp_max, true);
+		Reporter.log("Pressure is :" + pressure, true);
+		Reporter.log("Sea level is :" + sea_level, true);
+	}
+
+	public static Object[][] getTableData(String FilePath, String SheetName, int numberOfCol) throws Exception {
+
+		String[][] tabArray = null;
+		try {
+
+			FileInputStream ExcelFile = new FileInputStream(FilePath);
+			ExcelWBook = new XSSFWorkbook(ExcelFile);
+			ExcelWSheet = ExcelWBook.getSheet(SheetName);
+			int startRow = 1;
+			int startCol = 0;
+			int ci, cj;
+			int totalRows = ExcelWSheet.getLastRowNum();
+
+			tabArray = new String[totalRows][numberOfCol];
+			ci = 0;
+			for (int i = startRow; i <= totalRows; i++, ci++) {
+				cj = 0;
+				for (int j = startCol; j < numberOfCol; j++, cj++) {
+					tabArray[ci][cj] = getCellData(i, j);
+				}
+			}
+		} catch (FileNotFoundException e) {
+			System.out.println("Could not read the Excel sheet");
+			e.printStackTrace();
+		} catch (IOException e) {
+			System.out.println("Could not read the Excel sheet");
+			e.printStackTrace();
+		}
+		return (tabArray);
+	}
+
+	public static String getCellData(int RowNum, int ColNum) throws Exception {
+		String CellData = "";
+		try {
+			Cell = ExcelWSheet.getRow(RowNum).getCell(ColNum);
+			int dataType = Cell.getCellType();
+			if (dataType == 3) {
+				return "";
+			} else {
+				CellData = Cell.getStringCellValue();
+			}
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+			throw (e);
+		}
+		return CellData;
+	}
+
+	public static void main(String args[]) {
+		Object[][] excelData = null;
+		ArrayList<Pojo> writetoexcel = new ArrayList<Pojo>();
+		try {
+			excelData = ExcelData();
+
+			RestAssured.config = RestAssured.config().sslConfig(SSLConfig.sslConfig().relaxedHTTPSValidation());
+			String url = "https://samples.openweathermap.org/data/2.5/history/city?q=London,UK&appid=b1b15e";
+			Response response = given().that().queryParameter("q", "London,UK").when().get(url).andReturn();
+			String res = response.getBody().asString();
+			Reporter.log("The response Body is " + res, true);
+			Gson gson = new Gson();
+			Type type = new TypeToken<Message>() {
+			}.getType();
+			Message message = gson.fromJson(res, type);
+
+			for (int i = 0; i < message.getList().size(); i++) {
+				Pojo tempObj = new Pojo();
+				tempObj.setActualTempData(message.getList().get(i).getMain().getTemp());
+				tempObj.setExpectedTempData((String) excelData[i][0]);
+				tempObj.setActualMinTempData(message.getList().get(i).getMain().getTempMin());
+				tempObj.setExpectedMinTempData((String) excelData[i][1]);
+				tempObj.setActualMaxTempData(message.getList().get(i).getMain().getTempMax());
+				tempObj.setExpectedMaxTempData((String) excelData[i][2]);
+				tempObj.setActualPressureData(message.getList().get(i).getMain().getPressure());
+				tempObj.setExpectedPressureData((String) excelData[i][3]);
+				tempObj.setActualSeaLevelData(message.getList().get(i).getMain().getSeaLevel());
+				tempObj.setExpectedSeaLevelData((String) excelData[i][4]);
+
+				writetoexcel.add(tempObj);
+				Reporter.log("Expected :" + tempObj.ExpectedMaxTempData, true);
+				Reporter.log("Actual:" + tempObj.ActualMaxTempData, true);
+			}
+
+			XSSFWorkbook workbook1 = new XSSFWorkbook();
+			XSSFSheet sheet = workbook1.createSheet("sheet1");// creating a blank sheet
+			int rownum = 1;
+			Row row = sheet.createRow(0);
+			createExcelHeader(row);
+			for (Pojo record : writetoexcel) {
+
+				row = sheet.createRow(rownum++);
+				createList(record, row);
+
+			}
+
+			FileOutputStream outp = new FileOutputStream(new File("Task4Output.xlsx")); 
+			workbook1.write(outp);
+			outp.close();
+			workbook1.close();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	private static void createList(Pojo record, Row row) 
+	{
+		Cell cell = row.createCell(0);
+		cell.setCellValue(record.getActualTempData());
+
+		cell = row.createCell(1);
+		cell.setCellValue(record.getExpectedTempData());
+
+		cell = row.createCell(2);
+		cell.setCellValue(record.getActualMaxTempData());
+
+		cell = row.createCell(3);
+		cell.setCellValue(record.getExpectedMaxTempData());
+
+		cell = row.createCell(4);
+		cell.setCellValue(record.getActualMinTempData());
+
+		cell = row.createCell(5);
+		cell.setCellValue(record.getExpectedMinTempData());
+
+		cell = row.createCell(6);
+		cell.setCellValue(record.getActualPressureData());
+
+		cell = row.createCell(7);
+		cell.setCellValue(record.getExpectedPressureData());
+		if (record.getActualSeaLevelData() != null) {
+			cell = row.createCell(8);
+			cell.setCellValue(record.getActualSeaLevelData());
+		}
+
+		if (record.getExpectedSeaLevelData() != null) {
+			cell = row.createCell(9);
+			cell.setCellValue(record.getExpectedSeaLevelData());
+		}
+	}
+
+	private static void createExcelHeader(Row row) // creating cells for each row
+	{
+		Cell cell = row.createCell(0);
+		cell.setCellValue("Actual Temperature");
+
+		cell = row.createCell(1);
+		cell.setCellValue("Expected Temperature");
+
+		cell = row.createCell(2);
+		cell.setCellValue("Actual Min Temperature");
+
+		cell = row.createCell(3);
+		cell.setCellValue("Expected Min Temperature");
+
+		cell = row.createCell(4);
+		cell.setCellValue("Actual Max Temperature");
+
+		cell = row.createCell(5);
+		cell.setCellValue("Expected Max Temperature");
+
+		cell = row.createCell(6);
+		cell.setCellValue("Actual Pressure");
+
+		cell = row.createCell(7);
+		cell.setCellValue("Expected Pressure");
+
+		cell = row.createCell(8);
+		cell.setCellValue("Actual Sea Level");
+
+		cell = row.createCell(9);
+		cell.setCellValue("Expected Sea Level");
+
+	}
+
+	public static Object[][] ExcelData() throws Exception {
+		Object[][] testObjArray = getTableData("C:\\Users\\vkaushal\\Downloads\\convertcsv.xlsx", "Sheet 1", 5);
+		Reporter.log("Reading data from excel is successful", true);
+
+		for (Object[] row : testObjArray) {
+			readExcel(row[0].toString(), row[1].toString(), row[2].toString(), row[3].toString(), row[4].toString());
+		}
+		return testObjArray;
+	}
+
+}

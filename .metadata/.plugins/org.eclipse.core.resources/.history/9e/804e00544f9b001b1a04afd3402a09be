@@ -1,0 +1,78 @@
+package com.assignment.task4;
+
+public class Pojo {
+		 Double ActualTempData;
+		 String ExpectedTempData;
+			 Double ActualMinTempData;
+			 String ExpectedMinTempData;
+			 Double ActualMaxTempData;
+			 String ExpectedMaxTempData;
+			 Double ActualPressureData;
+			 String ExpectedPressureData;
+			 Double ActualSeaLevelData;
+			 String ExpectedSeaLevelData;
+		 public Double getActualTempData() {
+			return ActualTempData;
+		}
+		public void setActualTempData(Double actualTempData) {
+			ActualTempData = actualTempData;
+		}
+		public String getExpectedTempData() {
+			return ExpectedTempData;
+		}
+		public void setExpectedTempData(String expectedTempData) {
+			ExpectedTempData = expectedTempData;
+		}
+		public Double getActualMinTempData() {
+			return ActualMinTempData;
+		}
+		public void setActualMinTempData(Double actualMinTempData) {
+			ActualMinTempData = actualMinTempData;
+		}
+		public String getExpectedMinTempData() {
+			return ExpectedMinTempData;
+		}
+		public void setExpectedMinTempData(String expectedMinTempData) {
+			ExpectedMinTempData = expectedMinTempData;
+		}
+		public Double getActualMaxTempData() {
+			return ActualMaxTempData;
+		}
+		public void setActualMaxTempData(Double actualMaxTempData) {
+			ActualMaxTempData = actualMaxTempData;
+		}
+		public String getExpectedMaxTempData() {
+			return ExpectedMaxTempData;
+		}
+		public void setExpectedMaxTempData(String expectedMaxTempData) {
+			ExpectedMaxTempData = expectedMaxTempData;
+		}
+		public Double getActualPressureData() {
+			return ActualPressureData;
+		}
+		public void setActualPressureData(Double actualPressureData) {
+			ActualPressureData = actualPressureData;
+		}
+		public String getExpectedPressureData() {
+			return ExpectedPressureData;
+		}
+		public void setExpectedPressureData(String expectedPressureData) {
+			ExpectedPressureData = expectedPressureData;
+		}
+		public Double getActualSeaLevelData() {
+			return ActualSeaLevelData;
+		}
+		public void setActualSeaLevelData(Double actualSeaLevelData) {
+			ActualSeaLevelData = actualSeaLevelData;
+		}
+		public String getExpectedSeaLevelData() {
+			return ExpectedSeaLevelData;
+		}
+		public void setExpectedSeaLevelData(String expectedSeaLevelData) {
+			ExpectedSeaLevelData = expectedSeaLevelData;
+		}
+	
+		
+		 
+
+}

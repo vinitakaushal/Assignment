@@ -1,0 +1,8 @@
+package com.assignment1.pages;
+
+import com.codeborne.selenide.SelenideElement;
+
+public class Confirmation {
+@FindBy(xpath="//td[text()='Id']/following-sibling::td")
+private SelenideElement ConfirmationNum;
+}

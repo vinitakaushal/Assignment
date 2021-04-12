@@ -1,0 +1,12 @@
+package com.assignment1.pages;
+
+import org.openqa.selenium.support.FindBy;
+
+import com.codeborne.selenide.ElementsCollection;
+
+public class FlightRecommendation {
+@FindBy(xpath="(//input[@value='Choose This Flight'])[2]")
+private ElementsCollection ChooseFlightButton;
+
+
+}

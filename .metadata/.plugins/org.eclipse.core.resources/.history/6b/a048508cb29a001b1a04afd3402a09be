@@ -1,0 +1,16 @@
+package com.assignment1.pages;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.support.FindBy;
+
+import com.codeborne.selenide.CollectionCondition;
+import com.codeborne.selenide.ElementsCollection;
+
+public class FlightRecommendation {
+
+public void clickChooseFlightByRow(int i) {
+	ElementsCollection ChooseFlightButton =$$(By.xpath("(//input[@value='Choose This Flight'])["+i+"]"));
+	ChooseFlightButton.shouldBe(CollectionCondition.sizeGreaterThan(0));
+	
+}
+}

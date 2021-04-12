@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Failed suite [Suite]">
+  <test name="Booking Flow validation(failed)">
+    <classes>
+      <class name="com.assignment1.automation.BookingFlow">
+        <methods>
+          <include name="setChromeAsBrowser"/>
+          <include name="launchURL"/>
+          <include name="validateConfirmationId"/>
+          <include name="fillPassengerInfo"/>
+          <include name="searchFlight"/>
+        </methods>
+      </class> <!-- com.assignment1.automation.BookingFlow -->
+    </classes>
+  </test> <!-- Booking Flow validation(failed) -->
+</suite> <!-- Failed suite [Suite] -->

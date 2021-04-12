@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<suite name="Suite" parallel="false">
+  <test name="Booking Flow validation">
+    <classes>
+      <class name="com.assignment1.automation.BookingFlow"/>
+    </classes>
+  </test> <!-- Test -->
+</suite> <!-- Suite -->

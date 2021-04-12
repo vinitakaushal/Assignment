@@ -1,0 +1,5 @@
+package com.assignment1.restAssured.task1.model;
+
+public class Coord {
+
+}
